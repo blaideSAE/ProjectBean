@@ -7,12 +7,13 @@ namespace PlayerControllerScripts.Firstperson
     {
         public float radius, maxDistance;
         private float distance;
-        public Transform LookTransform;
+        public Transform lookTransform;
         public Vector3 originOffset;
         public InputActionMap inputActionMap; 
         public InputActionAsset inputActionAsset;
         public LayerMask interactables;
         public IInteractable[] iInteractable;
+        public Vector3 closestInteractable;
 
         public LayerMask blockingLayers;
         // Start is called before the first frame update
@@ -24,16 +25,24 @@ namespace PlayerControllerScripts.Firstperson
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
-        
+         FindInteractables();
         }
-    
+
         void OnInteractInput(InputAction.CallbackContext ctx)
+        {
+            foreach ( IInteractable interactable in iInteractable)
+            {
+                interactable.OnInteraction();
+            }
+        }
+
+        void FindInteractables()
         {
             distance = maxDistance;
         
-            Ray ray = new Ray(LookTransform.position + originOffset,LookTransform.forward);
+            Ray ray = new Ray(lookTransform.position + originOffset,lookTransform.forward);
             RaycastHit blockingHit;
             if (Physics.Raycast(ray,out blockingHit , maxDistance + radius, blockingLayers, QueryTriggerInteraction.Ignore))
             {
@@ -45,33 +54,61 @@ namespace PlayerControllerScripts.Firstperson
                 Physics.SphereCastAll(ray, radius, distance, interactables, QueryTriggerInteraction.Ignore);
             if (sphereCastHits.Length > 0)
             {
-                RaycastHit closestHit = sphereCastHits[0];
-        
-                foreach (RaycastHit hit in sphereCastHits)
-                {
-                    if (hit.distance < closestHit.distance)
-                    {
-                        closestHit = hit;
-                    }
-                }
+               
 
-                iInteractable = closestHit.collider.gameObject.GetComponents<IInteractable>();
-
-                foreach ( IInteractable interactable in iInteractable)
-                {
-                    interactable.OnInteraction();
-                }
+                iInteractable = ClosestToRay(sphereCastHits,ray).collider.gameObject.GetComponents<IInteractable>();
+                //iInteractable = ClosestToPoint(sphereCastHits,blockingHit.point).collider.gameObject.GetComponents<IInteractable>();
+               closestInteractable = ClosestToRay(sphereCastHits, ray).collider.gameObject.transform.position;
             }
         }
 
-        private void OnDrawGizmosSelected()
+        float DistanceFromRay(Ray ray, Vector3 point)
         {
-            if (distance > maxDistance || distance == 0)
+            return Vector3.Cross(ray.direction, point - ray.origin).magnitude;
+        }
+
+        
+        //Does not work yet.
+        RaycastHit ClosestToRay(RaycastHit[] raycastHits,Ray ray)
+        {
+            RaycastHit closestHit = raycastHits[0];
+            float distancefromRay = DistanceFromRay(ray,closestHit.point);
+            
+            foreach (RaycastHit hit in raycastHits)
             {
-                distance = maxDistance;
+                if (DistanceFromRay(ray,hit.point) < distancefromRay)
+                {
+                    closestHit = hit;
+                    distancefromRay = DistanceFromRay(ray, closestHit.point);
+                }
             }
 
-            Gizmos.DrawWireSphere(LookTransform.position + originOffset + (LookTransform.forward * distance), radius);
+            return closestHit;
+        }
+        RaycastHit ClosestToPoint(RaycastHit[] raycastHits,Vector3 point)
+        {
+            RaycastHit closestHit = raycastHits[0];
+            float distancefromPoint = Vector3.Distance(closestHit.point,point);
+            
+            foreach (RaycastHit hit in raycastHits)
+            {
+                if ( Vector3.Distance(hit.point,point)  < distancefromPoint)
+                {
+                    closestHit = hit;
+                    distancefromPoint = Vector3.Distance(closestHit.point,point);
+                }
+            }
+
+            return closestHit;
+        }
+        
+
+        private void OnDrawGizmosSelected()
+        {
+           // Gizmos.DrawWireSphere(lookTransform.position + originOffset + (lookTransform.forward * distance), radius);
+           // Gizmos.DrawRay(lookTransform.position + originOffset,(lookTransform.forward * distance));
+           // Gizmos.DrawSphere(lookTransform.position + originOffset + (lookTransform.forward * distance),0.01f);
+            Gizmos.DrawWireSphere(closestInteractable,0.1f);
         }
     }
 }

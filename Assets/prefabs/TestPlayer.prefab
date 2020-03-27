@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6171066179899738318}
   - component: {fileID: 6171066179899738319}
   - component: {fileID: 6171066179899738314}
+  - component: {fileID: 1909383958}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ac0ad85bc2fc8494485a0997c3acaf8e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,9 +137,38 @@ MonoBehaviour:
     m_Bindings: []
   inputActionAsset: {fileID: -944628639613478452, guid: 19cf7609588ae99438552d90d6bf68c9,
     type: 3}
-  use: 0
   rotationSpeed: 30
   moveDir: {x: 0, y: 0, z: 0}
+--- !u!114 &1909383958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6171066179899738320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48b6da7322b9cb4aa6459b6ac7f38a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.85
+  maxDistance: 1.73
+  LookTransform: {fileID: 6171066181118461611}
+  originOffset: {x: 0, y: 0, z: 0}
+  inputActionMap:
+    m_Name: Input
+    m_Id: 1022c234-3b97-4158-ab5f-a873ade31f9c
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
+  inputActionAsset: {fileID: -944628639613478452, guid: 19cf7609588ae99438552d90d6bf68c9,
+    type: 3}
+  interactables:
+    serializedVersion: 2
+    m_Bits: 256
+  blockingLayers:
+    serializedVersion: 2
+    m_Bits: 17
 --- !u!1 &6171066181118461614
 GameObject:
   m_ObjectHideFlags: 0

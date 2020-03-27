@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 6268173167051521849}
   - component: {fileID: 8892858108681889292}
   - component: {fileID: 1407289704825292838}
-  m_Layer: 0
+  - component: {fileID: 8296172668188364933}
+  m_Layer: 8
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6964358954095430954}
-  m_LocalRotation: {x: -0, y: 0.00000002107342, z: -0.00000005268355, w: 1}
+  m_LocalRotation: {x: 0, y: -0, z: 0, w: -1}
   m_LocalPosition: {x: -0.01, y: -0.52, z: 0.241}
   m_LocalScale: {x: 168.0489, y: 265.53232, z: 55.778194}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 180.00002}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 360}
 --- !u!137 &8892858108681889292
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -143,3 +144,16 @@ MonoBehaviour:
     m_RotationOrder: 4
   buttonBlendShapeValue: 1.0300003
   _skinnedMeshRenderer: {fileID: 0}
+--- !u!65 &8296172668188364933
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6964358954095430954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0031332201, y: 0.0006378576, z: 0.0031332201}
+  m_Center: {x: -2.3283073e-10, y: -0.0002006512, z: 0.0000000019420807}
