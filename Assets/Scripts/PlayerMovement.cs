@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
          
         moveDir.z = .1f * moveControlBuffer.y; 
         moveDir.x = .1f * moveControlBuffer.x; 
-        moveDir.y = 0; 
+        moveDir.y = UnityEngine.Physics.gravity.y; 
         moveDir = transform.rotation * moveDir; 
         characterController.Move(moveDir); 
          
