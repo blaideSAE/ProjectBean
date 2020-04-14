@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace ButtonScripts
 {
-    public class ButtonPressAnimation : MonoBehaviour,IInteractable
+    public class ButtonPress : MonoBehaviour,IInteractable
     {
         public bool buttonState;
         public float baseSpeed;
@@ -13,6 +14,8 @@ namespace ButtonScripts
         public float buttonBlendShapeValue;
 
         public SkinnedMeshRenderer _skinnedMeshRenderer;
+
+        public UnityEvent OnPress;
         // Start is called before the first frame update
         void Start()
         {
@@ -22,6 +25,7 @@ namespace ButtonScripts
         public void OnInteraction()
         {
             buttonState = !buttonState;
+                OnPress?.Invoke();
         }
 
         // Update is called once per frame

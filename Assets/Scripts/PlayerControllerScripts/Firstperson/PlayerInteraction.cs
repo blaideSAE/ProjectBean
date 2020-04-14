@@ -60,6 +60,10 @@ namespace PlayerControllerScripts.Firstperson
                 //iInteractable = ClosestToPoint(sphereCastHits,blockingHit.point).collider.gameObject.GetComponents<IInteractable>();
                closestInteractable = ClosestToRay(sphereCastHits, ray).collider.gameObject.transform.position;
             }
+            else
+            {
+                iInteractable = new IInteractable[0];
+            }
         }
 
         float DistanceFromRay(Ray ray, Vector3 point)

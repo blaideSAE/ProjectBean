@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace PlayerControllerScripts.Firstperson
@@ -33,8 +34,13 @@ namespace PlayerControllerScripts.Firstperson
  
  
  
-        } 
- 
+        }
+
+        private void OnEnable()
+        {
+            
+        }
+
         public void MovementControlChanged(InputAction.CallbackContext ctx) 
         { 
             // moveControlBuffer = ctx.ReadValue<Vector2>(); 
@@ -42,29 +48,31 @@ namespace PlayerControllerScripts.Firstperson
  
 
         private void FixedUpdate() 
-        { 
-            deltaX = inputActionMap.actions[2].ReadValue<Vector2>().x * Time.deltaTime * rotationSpeed; 
+        {
+            deltaX = inputActionMap.actions[2].ReadValue<Vector2>().x * Time.deltaTime * rotationSpeed;
+            
             rotEulers = transform.rotation.eulerAngles; 
-            rotEulers.y += deltaX; 
-            transform.rotation = Quaternion.Euler(0, rotEulers.y, 0); 
-         
-         
-         
+            rotEulers.y += deltaX;
+
+
+            transform.rotation = Quaternion.Euler(0, rotEulers.y, 0);
+
             moveControlBuffer = inputActionMap.actions[0].ReadValue<Vector2>(); 
          
             moveDir.z = .1f * moveControlBuffer.y; 
             moveDir.x = .1f * moveControlBuffer.x; 
             moveDir.y = UnityEngine.Physics.gravity.y; 
-            moveDir = transform.rotation * moveDir; 
-            characterController.Move(moveDir); 
-         
-         
-         
- 
-        
- 
- 
- 
+            moveDir = transform.rotation * moveDir;
+            characterController.Move(moveDir);
+            
+
+
+
+
+
+
+
+
         } 
     }
 } 

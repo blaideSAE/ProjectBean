@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace PlayerControllerScripts.Firstperson
@@ -22,11 +23,21 @@ namespace PlayerControllerScripts.Firstperson
             inputActionMap = inputActionAsset.actionMaps[0]; 
             inputActionMap.actions[2].Enable(); 
             inputActionMap.actions[2].performed += CameraMovementControlChanged;
-        } 
- 
+        }
+
+        private void OnEnable()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        public void OnDisable()
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+
         void Update() 
         { 
-            if (Application.isFocused && rotationEnabled) 
+            if (Application.isFocused && rotationEnabled && Cursor.lockState == CursorLockMode.Locked ) 
             { 
                 RotateCamera(); 
             } 
