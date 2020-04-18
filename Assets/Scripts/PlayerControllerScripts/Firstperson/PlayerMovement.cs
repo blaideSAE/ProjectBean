@@ -21,8 +21,7 @@ namespace PlayerControllerScripts.Firstperson
             characterController = GetComponent<CharacterController>(); 
             inputActionMap = inputActionAsset.actionMaps[0]; 
             inputActionMap.actions[0].Enable(); 
-            inputActionMap.actions[0].performed += MovementControlChanged; 
-
+            inputActionMap.actions[0].performed += MovementControlChanged;
             inputActionMap.actions[2].Enable(); 
  
  

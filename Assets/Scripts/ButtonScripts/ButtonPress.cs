@@ -7,14 +7,9 @@ namespace ButtonScripts
     {
         public bool buttonState;
         public float baseSpeed;
-    
         public AnimationCurve speedCurve;
-    
-
         public float buttonBlendShapeValue;
-
         public SkinnedMeshRenderer _skinnedMeshRenderer;
-
         public UnityEvent OnPress;
         // Start is called before the first frame update
         void Start()
