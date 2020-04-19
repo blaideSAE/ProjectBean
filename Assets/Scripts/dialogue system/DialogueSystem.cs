@@ -128,7 +128,12 @@ namespace AI
         public BeanQuestionAndAvailableAnswers(BeanQuestion question)
         {
             this.question = question;
-            availableAnsers = question.possibleAnswers;
+            availableAnsers = new List<string>();
+
+            foreach (string s in question.possibleAnswers)
+            {
+             availableAnsers.Add(s);   
+            }
         }
     }
 

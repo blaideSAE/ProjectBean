@@ -119,9 +119,14 @@ public class BeanSpawner : MonoBehaviour
         {
             Spawn();
         }
+        StartCoroutine(UpdateBeans());
+    }
 
+    public IEnumerator UpdateBeans()
+    {
+        yield return new WaitForEndOfFrame();
+        
         int colorIndex = 0;
-
         foreach (Bean bean in SpawnedBeans)
         {
             bean.setMaterialToColor(beanAnsweredQuestionSetPool[colorIndex].color);

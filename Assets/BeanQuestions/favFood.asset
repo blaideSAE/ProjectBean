@@ -14,4 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Favourite food
   body: Hey, What is your favourite food?
-  possibleAnswers: []
+  possibleAnswers:
+  - cheese
+  - pizza
+  - spaghetti
+  - spaghetti
+  - spaghetti
+  - spaghetti

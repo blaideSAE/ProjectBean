@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BeanQuestion
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 2117b27511d74d0439b57b0b9381902c,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: name
+    value: favourite sport.
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: body
+    value: Please tell me what your favourite sport is.
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: possibleAnswers.Array.size
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: possibleAnswers.Array.data[0]
+    value: I love Tennis.
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: possibleAnswers.Array.data[1]
+    value: My favourite sport is darts.
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: possibleAnswers.Array.data[2]
+    value: Bowling.
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: possibleAnswers.Array.data[3]
+    value: Baseball.
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: possibleAnswers.Array.data[4]
+    value: lawn bolws
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: possibleAnswers.Array.data[5]
+    value: golf
+    objectReference: {fileID: 0}

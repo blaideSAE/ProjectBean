@@ -14,4 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: favourite sport.
   body: Please tell me what your favourite sport is.
-  possibleAnswers: []
+  possibleAnswers:
+  - Baseball.
+  - lawn bolws
+  - golf
+  - golf
+  - golf
+  - golf
