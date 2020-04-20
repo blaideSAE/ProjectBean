@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace ButtonScripts
 {
     public class ButtonPress : MonoBehaviour,IInteractable
     {
-        public bool buttonState;
-        public float baseSpeed;
+        public bool busy;
+        public float time;
         public AnimationCurve speedCurve;
         public float buttonBlendShapeValue;
         public SkinnedMeshRenderer _skinnedMeshRenderer;
@@ -19,25 +20,27 @@ namespace ButtonScripts
 
         public void OnInteraction()
         {
-            buttonState = !buttonState;
+            if (!busy)
+            {
+                busy = true;
                 OnPress?.Invoke();
-        }
+                Tween t = DOTween.To(() => buttonBlendShapeValue, x => buttonBlendShapeValue = x, 120f, time)
+                    .SetEase(speedCurve);
 
+                t.onComplete += NotBusy;
+            }
+        }
+        void NotBusy()
+        {
+            busy = false;
+        }
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (buttonState && buttonBlendShapeValue > 0f)
+            if (busy)
             {
-                buttonBlendShapeValue -= baseSpeed *0.01f; 
-                _skinnedMeshRenderer.SetBlendShapeWeight(0,speedCurve.Evaluate(buttonBlendShapeValue));
+                _skinnedMeshRenderer.SetBlendShapeWeight(0, buttonBlendShapeValue);
             }
-            else if (!buttonState && buttonBlendShapeValue < 1f)
-            {
-
-                buttonBlendShapeValue += baseSpeed *0.01f;
-                _skinnedMeshRenderer.SetBlendShapeWeight(0,speedCurve.Evaluate(buttonBlendShapeValue));
-            }
-        
         }
     }
 }

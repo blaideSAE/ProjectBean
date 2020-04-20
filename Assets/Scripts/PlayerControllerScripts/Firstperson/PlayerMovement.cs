@@ -22,12 +22,16 @@ namespace PlayerControllerScripts.Firstperson
             inputActionMap = inputActionAsset.actionMaps[0]; 
             inputActionMap.actions[0].Enable(); 
             inputActionMap.actions[0].performed += MovementControlChanged;
-            inputActionMap.actions[2].Enable(); 
- 
- 
- 
-        } 
- 
+            inputActionMap.actions[2].Enable();
+        }
+
+        private void OnDestroy()
+        {
+            inputActionMap.actions[0].performed -= MovementControlChanged;
+            inputActionMap.actions[0].Disable();
+            inputActionMap.actions[2].Disable();
+        }
+
         void Start() 
         { 
  

@@ -98,44 +98,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153f7f6f27ca9b44faafebe57a6c2604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonState: 1
-  baseSpeed: 4
+  busy: 0
+  time: 1
   speedCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -140.48424
-      outSlope: -140.48424
-      tangentMode: 34
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.1041498
-      value: -14.631406
-      inSlope: 145.018
-      outSlope: 145.018
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.9930951
-      outWeight: 0.055435993
-    - serializedVersion: 3
-      time: 0.9181986
-      value: 115.77515
-      inSlope: 78.17797
-      outSlope: 78.17797
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.07612263
-      outWeight: 0.7356628
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 100
-      inSlope: -192.84686
-      outSlope: -192.84686
-      tangentMode: 34
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
@@ -144,6 +135,20 @@ MonoBehaviour:
     m_RotationOrder: 4
   buttonBlendShapeValue: 1.0300003
   _skinnedMeshRenderer: {fileID: 0}
+  OnPress:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: SpawnBeans
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &8296172668188364933
 BoxCollider:
   m_ObjectHideFlags: 0

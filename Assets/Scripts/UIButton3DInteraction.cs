@@ -33,6 +33,14 @@ public class UIButton3DInteraction : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        inputActionMap.actions[3].Disable();
+        inputActionMap.actions[4].Disable();
+        inputActionMap.actions[3].performed -= cursorMove;
+        inputActionMap.actions[4].performed -= cursorClick;
+    }
+
     private void cursorMove( InputAction.CallbackContext ctx)
     {
         ray = cam.ScreenPointToRay(ctx.ReadValue<Vector2>());
