@@ -43,6 +43,8 @@ public class BeanSpawner : MonoBehaviour
         GameObject g = Instantiate(beanPrefab.gameObject, position,transform.rotation);
         precalculatedBeanExtents = g.GetComponent<Collider>().bounds.extents;
 
+        Destroy(g);
+
         SpawnPoints = GetComponentsInChildren<SpawnPoint>().ToList();
         
         beanAnsweredQuestionSetPool = new List<BeanAnsweredQuestionSet>();
