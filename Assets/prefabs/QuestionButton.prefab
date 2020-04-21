@@ -129,7 +129,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -358.70374, w: 0}
+  m_margin: {x: 7.446747, y: 0, z: -717.17554, w: 0}
   m_textInfo:
     textComponent: {fileID: 990417852505301663}
     characterCount: 30
@@ -251,10 +251,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.6721698, g: 0.83122414, b: 0.8962264, a: 1}
-    m_HighlightedColor: {r: 0.60083663, g: 0.7496271, b: 0.8113208, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.6556604, g: 0.89730227, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.7877358, g: 0.93207544, b: 1, a: 1}
+    m_PressedColor: {r: 0.53631186, g: 0.7690225, b: 0.8679245, a: 1}
+    m_SelectedColor: {r: 0.7971698, g: 0.9395068, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

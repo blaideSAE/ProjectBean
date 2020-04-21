@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using PlayerControllerScripts.Firstperson;
 using TMPro;
 using UnityEngine;
@@ -19,8 +20,11 @@ namespace AI
         public TextMeshProUGUI answerText;
         public GameObject questionPrefab;
         public GameObject scrollViewContent;
-
+        public Vector3 questionPanelDefaultScale ;
         public List<GameObject> questionsInScrollView;
+
+        public float tweenTime;
+        public AnimationCurve tweenCurve;
 
         public static event Action<List<BeanAnsweredQuestion>,bool> DialogrequestEvent;
 
@@ -31,26 +35,42 @@ namespace AI
         private void Awake()
         {
             DialogueSystem.DialogrequestEvent += DisplayQuestions;
+            
+            questionPanelDefaultScale = questionPanel.transform.localScale;
+            
         }
 
         public void DisplayQuestionsWithRandomAnswers()
         {
             clearQuestions();
-            questionPanel.SetActive(true);
-            answerPanel.SetActive(false);
-            questionPromptText.text = questionprompts[Random.Range(0, questionprompts.Count - 1)];
-            pM.enabled = false;
-            cC.enabled = false;
-            
+            if (!questionPanel.activeInHierarchy)
+            {
+                questionPanel.SetActive(true);
+                answerPanel.SetActive(false);
+                questionPromptText.text = questionprompts[Random.Range(0, questionprompts.Count - 1)];
+                pM.enabled = false;
+                cC.enabled = false; 
+            }
             DisplayQuestions(allQuestions);
         }
 
         public void DisplayQuestions( List<BeanAnsweredQuestion> answeredQuestions,bool randomAnswer = false)
         {
             clearQuestions();
-            questionPanel.SetActive(true);
-            answerPanel.SetActive(false);
-            questionPromptText.text = questionprompts[Random.Range(0, questionprompts.Count - 1)];
+            if (!questionPanel.activeInHierarchy)
+            {
+
+                questionPanel.SetActive(true);
+                answerPanel.SetActive(false);
+
+
+                questionPanel.transform.localScale = Vector3.zero;
+                questionPanel.transform.DOScale(questionPanelDefaultScale, tweenTime* 2).SetEase(tweenCurve);
+
+
+                questionPromptText.text = questionprompts[Random.Range(0, questionprompts.Count - 1)];
+            }
+
             pM.enabled = false;
             cC.enabled = false;
             
@@ -96,11 +116,28 @@ namespace AI
         public void CloseDialogue()
         {
             clearQuestions();
+            Tween t = questionPanel.transform.DOScale(0, tweenTime);
+            t.onComplete += turnOffPanels;
+
+        }
+
+        public void turnOffPanels()
+        {
             questionPanel.SetActive(false);
             answerPanel.SetActive(false);
             pM.enabled = true;
             cC.enabled = true;
         }
+
+        public void ReturnFromAnswerPanel()
+        {
+            questionPanel.SetActive(true);
+            answerPanel.SetActive(false);
+        }
+
+
+
+
 
         public static void OnDialogrequestEvent(List<BeanAnsweredQuestion> obj,bool randomAnswer = false)
         {
