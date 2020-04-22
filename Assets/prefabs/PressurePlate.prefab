@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6856412499159463592}
   - component: {fileID: 4019650707886877702}
   - component: {fileID: 4019650707886877703}
-  - component: {fileID: 4019650707886877819}
+  - component: {fileID: 1807955728967959858}
+  - component: {fileID: 8377524802870032883}
   m_Layer: 8
   m_Name: PressurePlate
   m_TagString: Untagged
@@ -112,7 +113,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.033836406, y: 0.033924688, z: 0.0010645139}
   m_Center: {x: 0, y: 1.0124434e-18, z: 0.0007088073}
---- !u!114 &4019650707886877819
+--- !u!114 &1807955728967959858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,52 +122,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4965577115382996366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 153f7f6f27ca9b44faafebe57a6c2604, type: 3}
+  m_Script: {fileID: 11500000, guid: 033e8350c6867004e8c8b709543ff090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonState: 1
-  baseSpeed: 4
-  speedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: -140.48424
-      outSlope: -140.48424
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.1041498
-      value: -14.631406
-      inSlope: 145.018
-      outSlope: 145.018
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.9930951
-      outWeight: 0.055435993
-    - serializedVersion: 3
-      time: 0.9181986
-      value: 115.77515
-      inSlope: 78.17797
-      outSlope: 78.17797
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.07612263
-      outWeight: 0.7356628
-    - serializedVersion: 3
-      time: 1
-      value: 100
-      inSlope: -192.84686
-      outSlope: -192.84686
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  buttonBlendShapeValue: 1.0300003
-  _skinnedMeshRenderer: {fileID: 0}
+  OnBeanRequirementMet:
+    m_PersistentCalls:
+      m_Calls: []
+  BeansRequired: 0
+--- !u!65 &8377524802870032883
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4965577115382996366}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.033836406, y: 0.033924688, z: 0.02317053}
+  m_Center: {x: 0, y: 6.194985e-14, z: 0.012029634}
