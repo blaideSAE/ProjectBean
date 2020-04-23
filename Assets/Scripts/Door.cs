@@ -53,17 +53,16 @@ public class Door : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Vector3 boundsOffset = new Vector3(bounds.extents.x, -bounds.extents.y, bounds.extents.z);
         if (startPosition == Vector3.zero)
         {
             bounds = GetComponent<Collider>().bounds;
-            Gizmos.DrawWireCube( transform.position + OpenPosition - boundsOffset,bounds.size);
+            Gizmos.DrawWireCube( transform.position + OpenPosition,bounds.size);
         }
         else
         {
             
             bounds = GetComponent<Collider>().bounds;
-            Gizmos.DrawWireCube( startPosition + OpenPosition - boundsOffset,bounds.size);
+            Gizmos.DrawWireCube( startPosition + OpenPosition ,bounds.size);
         }
 
     }

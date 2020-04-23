@@ -69,6 +69,7 @@ MonoBehaviour:
   - {r: 0, g: 0.40106988, b: 1, a: 0}
   - {r: 0, g: 1, b: 0.12923098, a: 0}
   attemptHits: []
+  spawnOnStart: 1
 --- !u!1 &8332855114197633287
 GameObject:
   m_ObjectHideFlags: 0

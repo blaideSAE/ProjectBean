@@ -29,15 +29,12 @@ public class BeanSpawner : MonoBehaviour
     public bool DoSpawn;
     public bool RemoveSpawns;
     public List<Color> colors;
-    public List<Ray> AttemptRays;
-    public List<Vector3> attemptHits;
 
     public List<BeanAnsweredQuestionSet> beanAnsweredQuestionSetPool;
     // Start is called before the first frame update
+    public bool spawnOnStart = false;
     void Start()
     {
-        AttemptRays = new List<Ray>();
-        attemptHits = new List<Vector3>();
         Vector3 position = new Vector3(0,5,0);
         
         GameObject g = Instantiate(beanPrefab.gameObject, position,transform.rotation);
@@ -68,8 +65,13 @@ public class BeanSpawner : MonoBehaviour
             
             beanAnsweredQuestionSetPool.Add(bAQS);
         }
-        
-        
+
+        if (spawnOnStart)
+        {
+            SpawnBeans();
+        }
+
+
     }
     
 
@@ -115,8 +117,6 @@ public class BeanSpawner : MonoBehaviour
 
     public void SpawnBeans()
     {
-        AttemptRays.Clear();
-        attemptHits.Clear();
         for (int i = 0; i < spawnAmmount; i++)
         {
             Spawn();
@@ -131,9 +131,10 @@ public class BeanSpawner : MonoBehaviour
         int colorIndex = 0;
         foreach (Bean bean in SpawnedBeans)
         {
-            bean.setMaterialToColor(beanAnsweredQuestionSetPool[colorIndex].color);
+            //bean.setMaterialToColor(beanAnsweredQuestionSetPool[colorIndex].color);
+            bean.setMaterialToColor(colors[Random.Range(0, colors.Count)]);
             bean.dialogue = beanAnsweredQuestionSetPool[colorIndex].answeredQuestions;
-
+            bean.helpful = (Random.Range(0,2) == 1);
             if (colorIndex < beanAnsweredQuestionSetPool.Count - 1)
             {
                 colorIndex++;
@@ -175,11 +176,9 @@ public class BeanSpawner : MonoBehaviour
             float randZ = Random.Range(spawnBounds.min.z, spawnBounds.max.z);
             Vector3 o = new Vector3(randX,spawnBounds.max.y,randZ);
             Ray ray = new Ray(o,Vector3.down);
-            AttemptRays.Add(ray);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit,spawnBounds.size.y *2,SpawnableSurfaces,QueryTriggerInteraction.Ignore))
             {
-                attemptHits.Add(hit.point);
                 Vector3 offsetPosition = hit.point + new Vector3(0,+beanExtents.y,0);
                 Bounds prespawnCheckBounds = new Bounds( offsetPosition,beanExtents);
 
@@ -196,10 +195,6 @@ public class BeanSpawner : MonoBehaviour
                     clear = true;  
                 }
 
-            }
-            else
-            {
-                attemptHits.Add(Vector3.zero);
             }
         }
         return p;

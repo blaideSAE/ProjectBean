@@ -43,7 +43,7 @@ public class PressurePlate : MonoBehaviour
                 }
 
                 BeansPresent = beanList.Count;
-                belndShapeValue = (BeansPresent +0f)/ BeansRequired;
+                belndShapeValue = Mathf.Clamp((BeansPresent + 0f) / BeansRequired, 0, 1);
             }
         }
     }
@@ -57,7 +57,7 @@ public class PressurePlate : MonoBehaviour
             {
                 beanList.Remove(b);
                 BeansPresent = beanList.Count;
-                belndShapeValue = (BeansPresent+0f)/BeansRequired;
+                belndShapeValue = Mathf.Clamp((BeansPresent+0f)/BeansRequired,0,1);
             }
         }
     }

@@ -12,17 +12,34 @@ public class SceneChanger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        blackScreen.enabled = true;
+        blackScreen.color = new Color(0,0,0,1);
         Tween t = blackScreen.DOFade(0f, fadeTime);
     }
     // Update is called once per frame
     public void LoadMain()
     {
         Tween t = blackScreen.DOFade(1f, fadeTime);
-        t.onComplete += onFadeComplete;
+        t.onComplete += onFadeCompleteMain;
     }
 
-    public void onFadeComplete()
+    public void LoadMenu()
+    {
+        Tween t = blackScreen.DOFade(1f, fadeTime);
+        t.onComplete += onFadeCompleteMenu;
+    }
+
+    public void onFadeCompleteMain()
     {
         SceneManager.LoadScene(1);
+    }
+    public void onFadeCompleteMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

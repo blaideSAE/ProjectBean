@@ -109,7 +109,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1.7
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.85
   maxDistance: 1.73
-  LookTransform: {fileID: 6171066181118461611}
+  lookTransform: {fileID: 0}
   originOffset: {x: 0, y: 0, z: 0}
   inputActionMap:
     m_Name: Input
@@ -166,6 +166,7 @@ MonoBehaviour:
   interactables:
     serializedVersion: 2
     m_Bits: 256
+  closestInteractable: {x: 0, y: 0, z: 0}
   blockingLayers:
     serializedVersion: 2
     m_Bits: 17

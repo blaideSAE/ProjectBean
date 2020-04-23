@@ -19,6 +19,7 @@ namespace AI
         public GameObject answerPanel;
         public TextMeshProUGUI answerText;
         public GameObject questionPrefab;
+        public GameObject followRequestButton;
         public GameObject scrollViewContent;
         public Vector3 questionPanelDefaultScale ;
         public List<GameObject> questionsInScrollView;
@@ -32,12 +33,16 @@ namespace AI
         public PlayerMovement pM;
         public CameraController cC;
 
+        public Bean Lastbean;
+        private MessageBoxController _messageBoxController;
+
         private void Awake()
         {
             DialogueSystem.DialogrequestEvent += DisplayQuestions;
             
             questionPanelDefaultScale = questionPanel.transform.localScale;
-            
+            _messageBoxController = FindObjectOfType<MessageBoxController>();
+
         }
 
         public void DisplayQuestionsWithRandomAnswers()
@@ -93,6 +98,13 @@ namespace AI
                 questionButton.SetVariables(questionPanel,answerPanel,answerText,answer);
                 questionsInScrollView.Add(questionButtonObject);
             }
+
+            GameObject followRequest = Instantiate(followRequestButton, scrollViewContent.transform);
+            FollowRequestButton RequestButton = followRequest.GetComponent<FollowRequestButton>();
+            RequestButton.SetVariables(questionPanel,answerPanel,answerText,Lastbean);
+            
+            questionsInScrollView.Add(followRequest);
+
         }
 
         public void DisplayQuestions(List<BeanQuestion> questions)
@@ -125,8 +137,11 @@ namespace AI
         {
             questionPanel.SetActive(false);
             answerPanel.SetActive(false);
-            pM.enabled = true;
-            cC.enabled = true;
+            if (!_messageBoxController.AnyMessagesActive())
+            {
+                pM.enabled = true;
+                cC.enabled = true;
+            }
         }
 
         public void ReturnFromAnswerPanel()
