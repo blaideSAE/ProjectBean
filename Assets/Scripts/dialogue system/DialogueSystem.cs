@@ -72,7 +72,7 @@ namespace AI
                 questionPanel.transform.localScale = Vector3.zero;
                 questionPanel.transform.DOScale(questionPanelDefaultScale, tweenTime* 2).SetEase(tweenCurve);
 
-
+                
                 questionPromptText.text = questionprompts[Random.Range(0, questionprompts.Count - 1)];
             }
 
@@ -99,11 +99,13 @@ namespace AI
                 questionsInScrollView.Add(questionButtonObject);
             }
 
-            GameObject followRequest = Instantiate(followRequestButton, scrollViewContent.transform);
-            FollowRequestButton RequestButton = followRequest.GetComponent<FollowRequestButton>();
-            RequestButton.SetVariables(questionPanel,answerPanel,answerText,Lastbean);
-            
-            questionsInScrollView.Add(followRequest);
+            if (Lastbean != null)
+            {
+                GameObject followRequest = Instantiate(followRequestButton, scrollViewContent.transform);
+                FollowRequestButton RequestButton = followRequest.GetComponent<FollowRequestButton>();
+                RequestButton.SetVariables(questionPanel, answerPanel, answerText, Lastbean);
+                questionsInScrollView.Add(followRequest);
+            }
 
         }
 

@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     
     public static event Action ApproachedEvilDoer;
     
+    public static event Action FinalButton;
+
     public static event Action GameOver;
 
     public static event Action FirstFailFollowRequest;
@@ -33,12 +35,15 @@ public class GameManager : MonoBehaviour
     private PlayerMovement _playerMovement;
     public float distanceBeforeStartMessage;
 
+    public EvilBean evilBean;
+    public float evilBeanApproachDistance;
+
     public bool failedYet = false;
     public bool succeededYet = false;
 
     public enum GameStates
     {
-        PlayerhasntMoved,GameJustStarted,BeansGoingGrey,BeansHaveGoneGrey,
+        PlayerhasntMoved,GameJustStarted,BeansGoingGrey,BeansHaveGoneGrey,EvilDoerApproached,
     }
 
     public GameStates gameState;
@@ -54,6 +59,7 @@ public class GameManager : MonoBehaviour
         _playerMovement = FindObjectOfType<PlayerMovement>();
         playerStartPosition = _playerMovement.transform.position;
         PlayersFollowers = new List<Bean>();
+        evilBean = FindObjectOfType<EvilBean>();
     }
 
     public void GameStartDialogClosed()
@@ -96,7 +102,12 @@ public class GameManager : MonoBehaviour
         }
         else if (gameState == GameStates.BeansHaveGoneGrey)
         {
-            //Not sure i have to do anything here.
+            if (Vector3.Distance(evilBean.transform.position, _playerMovement.transform.position) <
+                evilBeanApproachDistance)
+            {
+                gameState = GameStates.EvilDoerApproached;
+                OnApproachedEvilDoer();
+            }
         }
         
     }
@@ -171,5 +182,10 @@ public class GameManager : MonoBehaviour
     public static void OnFollowersChanged()
     {
         followersChanged?.Invoke();
+    }
+
+    public static void OnFinalButton()
+    {
+        FinalButton?.Invoke();
     }
 }
