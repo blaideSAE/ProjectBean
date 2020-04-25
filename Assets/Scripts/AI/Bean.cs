@@ -109,7 +109,6 @@ public class Bean : MonoBehaviour,IInteractable
                         t.onComplete += NotBusy;
                         timer = 0;
                         timeLimit = Random.Range(0f, 3f);
-
                     }
                 }
             }
