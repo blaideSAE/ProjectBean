@@ -11,13 +11,13 @@ using Random = UnityEngine.Random;
 
 public class Bean : MonoBehaviour,IInteractable
 {
-    public Color StartColor;
+    public Color startColor;
     public Color CurrentColor;
     public bool busy;
     public bool scaling;
     public bool shaking;
     public bool rotating;
-    public MeshRenderer renderer;
+    public MeshRenderer beanRenderer;
     public List<BeanAnsweredQuestion> dialogue;
     public NavMeshAgent navMeshAgent;
     public List<string> answers;
@@ -31,6 +31,8 @@ public class Bean : MonoBehaviour,IInteractable
     public bool helpful;
 
     public Vector3 startPosition;
+
+    private float FadeTime;
     public enum HelpState
     {
         Following,AtPressurePlate,WaitingToHelp
@@ -56,27 +58,30 @@ public class Bean : MonoBehaviour,IInteractable
 
     private void Start()
     {
-        renderer = gameObject.GetComponent<MeshRenderer>();
+        beanRenderer = gameObject.GetComponent<MeshRenderer>();
         _playerMovement = FindObjectOfType<PlayerMovement>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         startPosition = transform.position;
+        FadeTime = FindObjectOfType<GameManager>().timetakenForBeansToGoGrey;
     }
 
     private void Awake()
     {
         GameManager.BeansGoGray += setMaterialToGrey;
+        GameManager.FinalButton += setMaterialBackToStartColor;
     }
 
     private void OnDestroy()
     {
         GameManager.BeansGoGray -= setMaterialToGrey;
+        GameManager.FinalButton -= setMaterialBackToStartColor;
     }
 
     public void setMaterialToColor( Color _color)
     {
-        StartColor = _color;
-        renderer.material.SetColor("_BaseColor",StartColor);
-        renderer.material.SetColor("_EmissionColor",new Color(StartColor.r,StartColor.g,StartColor.b,0f));
+        startColor = _color;
+        beanRenderer.material.SetColor("_BaseColor",startColor);
+        beanRenderer.material.SetColor("_EmissionColor",new Color(startColor.r,startColor.g,startColor.b,0f));
         // material.SetColor("_BaseColor",color);
         
     }
@@ -84,8 +89,14 @@ public class Bean : MonoBehaviour,IInteractable
     public void setMaterialToGrey()
     {
         Color g = Color.gray;
-        renderer.material.DOColor(g,"_BaseColor" ,FindObjectOfType<GameManager>().timetakenForBeansToGoGrey);
-        renderer.material.DOColor(new Color(g.r,g.g,g.b,0f),"_EmissionColor" ,FindObjectOfType<GameManager>().timetakenForBeansToGoGrey);
+        beanRenderer.material.DOColor(g,"_BaseColor" ,FadeTime);
+        beanRenderer.material.DOColor(new Color(g.r,g.g,g.b,0f),"_EmissionColor" ,FadeTime);
+    }
+
+    public void setMaterialBackToStartColor()
+    {
+        beanRenderer.material.DOColor(startColor,"_BaseColor",FadeTime);
+        beanRenderer.material.DOColor(new Color(startColor.r,startColor.g,startColor.b,0f),"_EmissionColor",FadeTime);
     }
 
     private void FixedUpdate()

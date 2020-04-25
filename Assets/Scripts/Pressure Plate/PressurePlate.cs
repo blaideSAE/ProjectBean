@@ -16,6 +16,8 @@ public class PressurePlate : MonoBehaviour
     public SkinnedMeshRenderer skinnedMeshRenderer;
 
     public float belndShapeValue;
+
+    private bool triggerd = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,9 +39,10 @@ public class PressurePlate : MonoBehaviour
             if (!beanList.Contains(b))
             {
                 beanList.Add(b);
-                if (beanList.Count >= BeansRequired)
+                if (beanList.Count >= BeansRequired && !triggerd)
                 {
                     OnBeanRequirementMet?.Invoke();
+                    triggerd = true;
                 }
 
                 BeansPresent = beanList.Count;

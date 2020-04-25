@@ -13,6 +13,7 @@ public class MessageBoxController : MonoBehaviour
     public GameObject secondDoorMessage;
     public GameObject thirdDoorMessage;
     public GameObject approachEvilDoerMessage;
+    public GameObject finalButtonMessage;
 
     public PlayerMovement playerMovement;
     public CameraController cameraController;
@@ -47,6 +48,7 @@ public class MessageBoxController : MonoBehaviour
         GameManager.SecondDoorOpened += DisplaySecondDoorMessage;
         GameManager.ThirdDoorOpened += DisplayThirdDoorMessage;
         GameManager.ApproachedEvilDoer += DisplayApproachEvilDoerMessage;
+        GameManager.FinalButton += DisplayFinalMessage;
     }
 
     public bool AnyMessagesActive()
@@ -93,7 +95,6 @@ public class MessageBoxController : MonoBehaviour
             playerMovement.enabled = true;
             cameraController.enabled = true;
         }
-        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void DisplayStartMessage()
@@ -125,6 +126,12 @@ public class MessageBoxController : MonoBehaviour
     public void DisplayApproachEvilDoerMessage()
     {
         approachEvilDoerMessage.SetActive(true);
+        disablePlayerAndCameraMovement();
+    }
+
+    public void DisplayFinalMessage()
+    {
+        finalButtonMessage.SetActive(true);
         disablePlayerAndCameraMovement();
     }
 }

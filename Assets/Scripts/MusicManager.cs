@@ -1,57 +1,67 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    private AudioSource audioSource;
-    public List<AudioClip> MusicList;
-
-    public int CurrentTrackIndex;
-
-    private bool songQued;
-
-    public float timeUntilNext;
+    public AudioSource audioSource;
+    
+    public AudioSource audioSource2;
+    public AudioSource audioSource3;
+    public AudioSource audioSource4;
+    public AudioSource audioSource5;
+    public float fadeTime;
+    
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.clip = MusicList[CurrentTrackIndex];
-        audioSource.Play();
-        QueNextTrack();
+        
+        //audioSource.clip = MusicList[CurrentTrackIndex];
+        // QueNextTrack();
+    }
+
+    public void MusicFade(AudioSource a, AudioSource b, float t)
+    {
+        a.DOFade(0, t).OnComplete(a.Stop);
+        b.DOFade(1, t);
     }
 
     private void FixedUpdate()
     {
-        if (songQued && timeUntilNext >= 0)
-        {
-            timeUntilNext -= Time.deltaTime;
-        }
-        else if(songQued)
-        {
-            audioSource.clip = MusicList[CurrentTrackIndex];
-            audioSource.Play();
-            songQued = false; //QueNextTrack();
-        }
+
     }
 
     private void Awake()
     {
-        GameManager.FirstDoorOpened += QueNextTrack;
-        GameManager.SecondDoorOpened += QueNextTrack;
-        GameManager.ThirdDoorOpened += QueNextTrack;
-        GameManager.ApproachedEvilDoer += QueNextTrack;
-        GameManager.FinalButton += QueNextTrack;
+        GameManager.FirstDoorOpened += first;
+        GameManager.SecondDoorOpened += second;
+        GameManager.ThirdDoorOpened += third;
+        GameManager.FinalButton += final;
     }
-    public void QueNextTrack()
+
+    public void first()
     {
-        CurrentTrackIndex += 1;
-        songQued = true;
-        timeUntilNext = audioSource.clip.length - audioSource.time;
-       // audioSource.clip = MusicList[CurrentTrackIndex];
-        //audioSource.PlayDelayed(TimeUntilNextWhenQued);
+        MusicFade(audioSource, audioSource2,fadeTime);
+        
     }
+
+    public void second()
+    {
+        MusicFade(audioSource2, audioSource3,fadeTime);
+    }
+
+    public void third()
+    {
+        MusicFade(audioSource3, audioSource4,fadeTime);
+    }
+
+    public void final()
+    {
+        MusicFade(audioSource4, audioSource5,fadeTime);
+    }
+
 
     // Update is called once per frame
     void Update()

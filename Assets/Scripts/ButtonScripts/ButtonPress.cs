@@ -12,6 +12,10 @@ namespace ButtonScripts
         public float buttonBlendShapeValue;
         public SkinnedMeshRenderer _skinnedMeshRenderer;
         public UnityEvent OnPress;
+
+        public bool sendEventOnce;
+
+        private bool eventSent = false;
         // Start is called before the first frame update
         void Start()
         {
@@ -23,7 +27,13 @@ namespace ButtonScripts
             if (!busy)
             {
                 busy = true;
-                OnPress?.Invoke();
+                if ( !(sendEventOnce && eventSent))
+                {
+                    OnPress?.Invoke();
+                    eventSent = true;
+                }
+
+                
                 Tween t = DOTween.To(() => buttonBlendShapeValue, x => buttonBlendShapeValue = x, 120f, time)
                     .SetEase(speedCurve);
 

@@ -127,6 +127,10 @@ public class GameManager : MonoBehaviour
             OnThirdDoorOpened();
         }
     }
+    public void finalButtonPressed()
+    {
+        OnFinalButton();
+    }
 
 
     private static void OnGameStart()

@@ -24,7 +24,7 @@ public class MessageBoxCode : MonoBehaviour
     {
         _messageBoxController = FindObjectOfType<MessageBoxController>();
 
-        ThisDialogBox.transform.DOScale(Vector3.zero, tweenTime * 2).SetEase(tweenCurve)
+        ThisDialogBox.transform.DOScale(Vector3.zero, tweenTime * 2).SetEase(Ease.Linear)
             .OnComplete(DialogClosed);
 
     }

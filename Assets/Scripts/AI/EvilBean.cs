@@ -21,6 +21,8 @@ public class EvilBean : MonoBehaviour
 
     public GameObject ThemText;
     public GameObject ThemBackGround;
+    public Renderer beanRenderer;
+    public Color startColor;
     
     
     BeanQuestion qOne;
@@ -36,6 +38,7 @@ public class EvilBean : MonoBehaviour
 
     public evilQuestionState qState;
     private bool busy = false;
+    private float fadeTime;
 
     private void Start()
     {
@@ -45,12 +48,28 @@ public class EvilBean : MonoBehaviour
         qTwo = ScriptableObject.CreateInstance<BeanQuestion>();
         qThree = ScriptableObject.CreateInstance<BeanQuestion>();
 
+        beanRenderer = GetComponent<Renderer>();
+        fadeTime = FindObjectOfType<GameManager>().timetakenForBeansToGoGrey;
+
+        //startColor = renderer.material.GetColor("_BaseColor");
+        beanRenderer.material.SetColor("_BaseColor",startColor);
+        beanRenderer.material.SetColor("_EmissionColor", new Color(startColor.r, startColor.g, startColor.b, 0f));
+        
         qOne.body = questionOne;
         qTwo.body = questionTwo;
         qThree.body = questionThree;
-        
+        setupAnswers();
+    }
+
+    public void setupAnswers()
+    {
+        qOne.possibleAnswers = new List<string>();
         qOne.possibleAnswers.Add(answerOne);
+        
+        qTwo.possibleAnswers = new List<string>();
         qTwo.possibleAnswers.Add(answerTwo);
+
+        qThree.possibleAnswers = new List<string>();
         qThree.possibleAnswers.Add(answerThree);
     }
 
@@ -65,6 +84,29 @@ public class EvilBean : MonoBehaviour
     private void Awake()
     {
         GameManager.ApproachedEvilDoer += onApproach;
+        GameManager.BeansGoGray += setMaterialToGrey;
+        GameManager.FinalButton += setMaterialBackToStartColor;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.ApproachedEvilDoer -= onApproach;
+        GameManager.BeansGoGray += setMaterialToGrey;
+        GameManager.FinalButton += setMaterialBackToStartColor;
+    }
+
+    public void setMaterialToGrey()
+    {
+        Color g = Color.gray;
+        beanRenderer.material.DOColor(g,"_BaseColor" ,FindObjectOfType<GameManager>().timetakenForBeansToGoGrey);
+        beanRenderer.material.DOColor(new Color(g.r,g.g,g.b,0f),"_EmissionColor" ,FindObjectOfType<GameManager>().timetakenForBeansToGoGrey);
+    }
+
+    public void setMaterialBackToStartColor()
+    {
+        beanRenderer.material.SetColor("_BaseColor", startColor);
+        beanRenderer.material.SetColor("_EmissionColor", new Color(startColor.r, startColor.g, startColor.b, 0f));
+
     }
 
     public void onApproach()
