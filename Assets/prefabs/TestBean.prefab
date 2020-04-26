@@ -109,12 +109,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc5f4ef4a17ab2045896e04cdf1eec25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 0, g: 0, b: 0, a: 0}
+  CurrentColor: {r: 0, g: 0, b: 0, a: 0}
   busy: 0
   scaling: 0
   shaking: 0
   rotating: 0
-  renderer: {fileID: 0}
+  beanRenderer: {fileID: 0}
   navMeshAgent: {fileID: 0}
   answers: []
   minFollowDistance: 3
@@ -122,6 +123,7 @@ MonoBehaviour:
   timeLimit: 0
   helpful: 0
   startPosition: {x: 0, y: 0, z: 0}
+  emissionIntesity: -1
   helpState: 2
 --- !u!54 &4656522211697298761
 Rigidbody:

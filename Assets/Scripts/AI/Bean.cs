@@ -31,6 +31,7 @@ public class Bean : MonoBehaviour,IInteractable
     public bool helpful;
 
     public Vector3 startPosition;
+    public float emissionIntesity;
 
     private float FadeTime;
     public enum HelpState
@@ -81,7 +82,7 @@ public class Bean : MonoBehaviour,IInteractable
     {
         startColor = _color;
         beanRenderer.material.SetColor("_BaseColor",startColor);
-        beanRenderer.material.SetColor("_EmissionColor",new Color(startColor.r,startColor.g,startColor.b,0f));
+        beanRenderer.material.SetColor("_EmissionColor",new Color(startColor.r,startColor.g,startColor.b,emissionIntesity));
         // material.SetColor("_BaseColor",color);
         
     }
@@ -90,13 +91,13 @@ public class Bean : MonoBehaviour,IInteractable
     {
         Color g = Color.gray;
         beanRenderer.material.DOColor(g,"_BaseColor" ,FadeTime);
-        beanRenderer.material.DOColor(new Color(g.r,g.g,g.b,0f),"_EmissionColor" ,FadeTime);
+        beanRenderer.material.DOColor(new Color(g.r,g.g,g.b,emissionIntesity),"_EmissionColor" ,FadeTime);
     }
 
     public void setMaterialBackToStartColor()
     {
         beanRenderer.material.DOColor(startColor,"_BaseColor",FadeTime);
-        beanRenderer.material.DOColor(new Color(startColor.r,startColor.g,startColor.b,0f),"_EmissionColor",FadeTime);
+        beanRenderer.material.DOColor(new Color(startColor.r,startColor.g,startColor.b,emissionIntesity),"_EmissionColor",FadeTime);
     }
 
     private void FixedUpdate()

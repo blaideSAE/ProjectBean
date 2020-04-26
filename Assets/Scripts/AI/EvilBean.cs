@@ -23,6 +23,7 @@ public class EvilBean : MonoBehaviour
     public GameObject ThemBackGround;
     public Renderer beanRenderer;
     public Color startColor;
+    public float emissionIntesity;
     
     
     BeanQuestion qOne;
@@ -53,7 +54,7 @@ public class EvilBean : MonoBehaviour
 
         //startColor = renderer.material.GetColor("_BaseColor");
         beanRenderer.material.SetColor("_BaseColor",startColor);
-        beanRenderer.material.SetColor("_EmissionColor", new Color(startColor.r, startColor.g, startColor.b, 0f));
+        beanRenderer.material.SetColor("_EmissionColor", new Color(startColor.r, startColor.g, startColor.b, emissionIntesity));
         
         qOne.body = questionOne;
         qTwo.body = questionTwo;
@@ -99,13 +100,13 @@ public class EvilBean : MonoBehaviour
     {
         Color g = Color.gray;
         beanRenderer.material.DOColor(g,"_BaseColor" ,FindObjectOfType<GameManager>().timetakenForBeansToGoGrey);
-        beanRenderer.material.DOColor(new Color(g.r,g.g,g.b,0f),"_EmissionColor" ,FindObjectOfType<GameManager>().timetakenForBeansToGoGrey);
+        beanRenderer.material.DOColor(new Color(g.r,g.g,g.b,emissionIntesity),"_EmissionColor" ,FindObjectOfType<GameManager>().timetakenForBeansToGoGrey);
     }
 
     public void setMaterialBackToStartColor()
     {
         beanRenderer.material.SetColor("_BaseColor", startColor);
-        beanRenderer.material.SetColor("_EmissionColor", new Color(startColor.r, startColor.g, startColor.b, 0f));
+        beanRenderer.material.SetColor("_EmissionColor", new Color(startColor.r, startColor.g, startColor.b, emissionIntesity));
 
     }
 

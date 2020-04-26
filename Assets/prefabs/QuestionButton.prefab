@@ -65,15 +65,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: What is your Favourite animal?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e8f44b3ba3e119e439c8236fa90d37f7, type: 2}
+  m_sharedMaterial: {fileID: 8677778964613961473, guid: e8f44b3ba3e119e439c8236fa90d37f7,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4283582654
+  m_fontColor: {r: 0.74509805, g: 0.28235295, b: 0.32156864, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -91,8 +92,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 29
+  m_fontSizeBase: 29
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -129,7 +130,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 7.446747, y: 0, z: -717.17554, w: 0}
+  m_margin: {x: 28.054321, y: 0, z: -717.17554, w: 0}
   m_textInfo:
     textComponent: {fileID: 990417852505301663}
     characterCount: 30
@@ -192,8 +193,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 339, y: 41.52}
+  m_AnchoredPosition: {x: 108.2, y: -5.649994}
+  m_SizeDelta: {x: 557, y: 30.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &990417854019710520
 CanvasRenderer:
@@ -221,7 +222,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -301,3 +302,5 @@ MonoBehaviour:
   answerPanel: {fileID: 0}
   answerText: {fileID: 0}
   answer: 
+  dialogueSystem: {fileID: 0}
+  evilBean: {fileID: 0}
