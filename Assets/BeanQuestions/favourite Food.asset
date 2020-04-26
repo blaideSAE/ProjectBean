@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2117b27511d74d0439b57b0b9381902c, type: 3}
+  m_Name: favourite Food
+  m_EditorClassIdentifier: 
+  name: Favourite food.
+  body: Do you have  favourite food?
+  possibleAnswers:
+  - mmm, Pizza is the best for sure, like, who doesn't like pizza!?
+  - Ooooh, burgers are pretty nice!
+  - I always go for a home grown salad, things taste so much better when you grow
+    it yourself!
+  - You tried Churros? They're amazing!

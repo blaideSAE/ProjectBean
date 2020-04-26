@@ -92,8 +92,8 @@ public class EvilBean : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.ApproachedEvilDoer -= onApproach;
-        GameManager.BeansGoGray += setMaterialToGrey;
-        GameManager.FinalButton += setMaterialBackToStartColor;
+        GameManager.BeansGoGray -= setMaterialToGrey;
+        GameManager.FinalButton -= setMaterialBackToStartColor;
     }
 
     public void setMaterialToGrey()

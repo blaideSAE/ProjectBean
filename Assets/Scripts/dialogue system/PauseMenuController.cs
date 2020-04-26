@@ -47,6 +47,11 @@ public class PauseMenuController : MonoBehaviour
         defaultControlsScale = controlsPanel.transform.localScale;
     }
 
+    private void OnDestroy()
+    {
+        MenuKey.performed -= MenuKeyPressed;
+    }
+
     public void DisableMovement()
     {
         _cameraController.enabled = false;

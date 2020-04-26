@@ -51,6 +51,17 @@ public class MessageBoxController : MonoBehaviour
         GameManager.FinalButton += DisplayFinalMessage;
     }
 
+    private void OnDestroy()
+    {
+        GameManager.GameStart -= DisplayStartMessage;
+        GameManager.AfterBeansGoGray -= DisplayGoneGreyMessage;
+        GameManager.FirstDoorOpened -= DisplayfirstDoorMessage;
+        GameManager.SecondDoorOpened -= DisplaySecondDoorMessage;
+        GameManager.ThirdDoorOpened -= DisplayThirdDoorMessage;
+        GameManager.ApproachedEvilDoer -= DisplayApproachEvilDoerMessage;
+        GameManager.FinalButton -= DisplayFinalMessage;
+    }
+
     public bool AnyMessagesActive()
     {
         bool s = false;

@@ -5,6 +5,8 @@ using System.Linq;
 using AI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 using Random = UnityEngine.Random;
 
 public class BeanSpawner : MonoBehaviour
@@ -33,6 +35,9 @@ public class BeanSpawner : MonoBehaviour
     public List<BeanAnsweredQuestionSet> beanAnsweredQuestionSetPool;
     // Start is called before the first frame update
     public bool spawnOnStart = false;
+
+    public bool randomColor = true;
+    public bool randomAnswers = false;
     void Start()
     {
         Vector3 position = new Vector3(0,5,0);
@@ -51,27 +56,37 @@ public class BeanSpawner : MonoBehaviour
             beanQuestionAndAvailableAnswersList.Add(new BeanQuestionAndAvailableAnswers(b));
         }
         
-        foreach (Color color in colors )
+        for (var i = 0; i < colors.Count; i++)
         {
+            Color color = colors[i];
             List<BeanAnsweredQuestion> answeredQuestions = new List<BeanAnsweredQuestion>();
-            foreach ( BeanQuestionAndAvailableAnswers b in beanQuestionAndAvailableAnswersList)
             {
-                int randomIndex = Random.Range(0, b.availableAnsers.Count);
-                answeredQuestions.Add( new BeanAnsweredQuestion(b.question,b.availableAnsers[randomIndex]));
-                b.availableAnsers.RemoveAt(randomIndex);
+                if (randomAnswers)
+                {
+                    foreach (BeanQuestionAndAvailableAnswers b in beanQuestionAndAvailableAnswersList)
+                    {
+                        int randomIndex = Random.Range(0, b.availableAnsers.Count);
+                        answeredQuestions.Add(new BeanAnsweredQuestion(b.question, b.availableAnsers[randomIndex]));
+                        b.availableAnsers.RemoveAt(randomIndex);
+                    }
+                }
+                else
+                {
+                    foreach (BeanQuestion beanQuestion in beanQuestions)
+                    {
+                        answeredQuestions.Add((new BeanAnsweredQuestion(beanQuestion,beanQuestion.possibleAnswers[i])));
+                    }
+                }
+                
+                BeanAnsweredQuestionSet bAQS = new BeanAnsweredQuestionSet(answeredQuestions, color);
+                beanAnsweredQuestionSetPool.Add(bAQS);
             }
-
-            BeanAnsweredQuestionSet bAQS = new BeanAnsweredQuestionSet(answeredQuestions,color);
-            
-            beanAnsweredQuestionSetPool.Add(bAQS);
         }
 
         if (spawnOnStart)
         {
-            SpawnBeans();
+            DoSpawn = true;
         }
-
-
     }
     
 
@@ -132,9 +147,17 @@ public class BeanSpawner : MonoBehaviour
         foreach (Bean bean in SpawnedBeans)
         {
             //bean.setMaterialToColor(beanAnsweredQuestionSetPool[colorIndex].color);
-            bean.setMaterialToColor(colors[Random.Range(0, colors.Count)]);
+            if (randomColor)
+            {
+                bean.setMaterialToColor(colors[Random.Range(0, colors.Count)]);
+            }
+            else
+            { 
+                bean.setMaterialToColor(beanAnsweredQuestionSetPool[colorIndex].color);
+            }
+            
             bean.dialogue = beanAnsweredQuestionSetPool[colorIndex].answeredQuestions;
-            bean.helpful = (Random.Range(0,2) == 1);
+            bean.helpful = ( bean.startColor == colors[1]);
             if (colorIndex < beanAnsweredQuestionSetPool.Count - 1)
             {
                 colorIndex++;

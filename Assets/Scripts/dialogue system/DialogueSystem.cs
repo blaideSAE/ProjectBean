@@ -45,6 +45,11 @@ namespace AI
 
         }
 
+        private void OnDestroy()
+        {
+            DialogueSystem.DialogrequestEvent -= DisplayQuestions;
+        }
+
         public void DisplayQuestionsWithRandomAnswers()
         {
             clearQuestions();
